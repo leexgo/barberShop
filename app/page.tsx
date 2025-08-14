@@ -1,7 +1,6 @@
 import { Button } from "./_components/ui/button"
 
 export default function Home() {
-  const name = "add"
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
       <h1 className="text-red-500">hello, world</h1>
