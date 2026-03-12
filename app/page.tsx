@@ -1,4 +1,4 @@
-import { SearchIcon } from "lucide-react"
+import { EyeIcon, FootprintsIcon, SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
@@ -23,6 +23,34 @@ const Home = async () => {
           <Input placeholder="Pesquisar..." />
           <Button size="icon">
             <SearchIcon />
+          </Button>
+        </div>
+
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <Button className="gap=2" variant="secondary">
+            <Image
+              src="/scissorsIcon.svg"
+              width={16}
+              height={16}
+              alt="Cabelo"
+            />
+            Cabelo
+          </Button>
+          <Button className="gap=2" variant="secondary">
+            <Image src="/mustacheIcon.svg" width={16} height={16} alt="Barba" />
+            Barba
+          </Button>
+          <Button className="gap=2" variant="secondary">
+            <Image src="/razorIcon.svg" width={16} height={16} alt="Barba" />
+            Acabamento
+          </Button>
+          <Button className="gap=2" variant="secondary">
+            <FootprintsIcon size={16} />
+            Pézinho
+          </Button>
+          <Button className="gap=2" variant="secondary">
+            <EyeIcon size={16} />
+            Sobrancelha
           </Button>
         </div>
 
@@ -69,7 +97,25 @@ const Home = async () => {
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
+        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
       </div>
+
+      <footer>
+        <Card className="w-full">
+          <CardContent className="px-5 py-6">
+            <p className="text-sm text-gray-400">
+              © 2023 Copyright <span className="font-bold"> FSW Barber</span>
+            </p>
+          </CardContent>
+        </Card>
+      </footer>
     </div>
   )
 }
