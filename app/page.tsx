@@ -1,13 +1,13 @@
-import { EyeIcon, FootprintsIcon, SearchIcon } from "lucide-react"
+import { SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import Image from "next/image"
 import { Card, CardContent } from "./_components/ui/card"
-import { Badge } from "./_components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "./_components/ui/avatar"
 import { db } from "./_lib/prisma"
 import BarbershopItem from "./_components/barbershopItem"
+import { quickSearchItems } from "./_constants/search"
+import BookingItem from "./_components/bookingItem"
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany()
@@ -27,31 +27,17 @@ const Home = async () => {
         </div>
 
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-          <Button className="gap=2" variant="secondary">
-            <Image
-              src="/scissorsIcon.svg"
-              width={16}
-              height={16}
-              alt="Cabelo"
-            />
-            Cabelo
-          </Button>
-          <Button className="gap=2" variant="secondary">
-            <Image src="/mustacheIcon.svg" width={16} height={16} alt="Barba" />
-            Barba
-          </Button>
-          <Button className="gap=2" variant="secondary">
-            <Image src="/razorIcon.svg" width={16} height={16} alt="Barba" />
-            Acabamento
-          </Button>
-          <Button className="gap=2" variant="secondary">
-            <FootprintsIcon size={16} />
-            Pézinho
-          </Button>
-          <Button className="gap=2" variant="secondary">
-            <EyeIcon size={16} />
-            Sobrancelha
-          </Button>
+          {quickSearchItems.map((item) => (
+            <Button key={item.title} className="gap-2" variant="secondary">
+              <Image
+                src={item.imageUrl}
+                width={16}
+                height={16}
+                alt={item.title}
+              />
+              {item.title}
+            </Button>
+          ))}
         </div>
 
         <div className="relative mt-6 h-[150px] w-full">
@@ -64,30 +50,7 @@ const Home = async () => {
           />
         </div>
 
-        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
-          Agendamentos
-        </h2>
-
-        <Card className="py-0">
-          <CardContent className="flex justify-between p-0">
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <Badge className="w-fit">Confirmado</Badge>
-              <h3 className="font-semibold">Corte de cabelo</h3>
-              <div className="flex items-center gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <p className="text-sm">Barbearia FSW</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center border-l-2 border-solid px-5">
-              <p className="text-sm">Fevereiro</p>
-              <p className="text-2xl">8</p>
-              <p className="text-sm">10:00</p>
-            </div>
-          </CardContent>
-        </Card>
+        <BookingItem />
 
         <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
           Recomendados
